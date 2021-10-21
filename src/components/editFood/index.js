@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import StyledInput from '../input';
-import { SaveButton } from './styles'
+import { SaveButton, Container } from './styles'
 
 function EditFoodComponent({func}) {
     
     const [food, setFood] = useState("");
     return (
-        <div>
+        <Container>
             <StyledInput 
                 type = "text"
                 value = {food}
@@ -15,7 +15,7 @@ function EditFoodComponent({func}) {
                 required
             />
             <SaveButton onClick={e => func(food)}>save</SaveButton>
-        </div>
+        </Container>
     )
 }
 

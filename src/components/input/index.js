@@ -12,7 +12,8 @@ function Input({
 }) {
     if(isYup === true) {
         return ( 
-        <StyledInput 
+        <StyledInput
+            autoComplete="off"
             {...register(name)} 
             type={type}
             {...rest}
@@ -21,6 +22,7 @@ function Input({
     else {
         return (
         <StyledInput 
+            autoComplete="off"
             type={type} 
             onChange={ e => onChangeFunc(e.target.value)}
             value = {stateValue}

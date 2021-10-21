@@ -25,10 +25,10 @@ function CreateFoodComponent() {
         .catch( err => console.log('deu ruim'))
     }
     return (
-        <StyledForm
-        onSubmitFunc={handleFood}
-        handleSubmit={handleSubmit}
-        >
+    <StyledForm
+    onSubmitFunc={handleFood}
+    handleSubmit={handleSubmit}
+    >
             <StyledInput
                 isYup
                 register={register}
