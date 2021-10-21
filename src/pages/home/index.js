@@ -2,7 +2,7 @@ import { Container, Header, Logout } from './styles';
 import FoodTable from '../../components/foodTable'
 import CreateFood from '../../components/createFood'
 import { useUser } from '../../providers/user';
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 import { useFood } from '../../providers/food';
 import { 
     MV_DESAFIO_LOCALSTORAGE_FOOD,
@@ -22,6 +22,12 @@ function HomePage() {
         setFood([])
         history.push('/login')
     }
+
+    const localUser = JSON.parse(localStorage.getItem(MV_DESAFIO_LOCALSTORAGE_USER));
+    if (!user && !localUser) {
+       return <Redirect to='/login' />
+    }
+
     return (
         <Container>
             <Header>

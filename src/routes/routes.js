@@ -14,11 +14,10 @@ function RouterComponent() {
     const { user, setUser } = useUser();
     const { food, setFood } = useFood();
 
-    const localUser = localStorage.getItem(MV_DESAFIO_LOCALSTORAGE_USER);
+    const localUser = JSON.parse(localStorage.getItem(MV_DESAFIO_LOCALSTORAGE_USER));
     if (!user && localUser) {
-        const parsed = JSON.parse(localUser);
         setUser({
-            ...parsed,
+            ...localUser,
             auth: true
         })
     }

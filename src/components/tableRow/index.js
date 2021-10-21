@@ -55,7 +55,7 @@ function FoodTable({ data }) {
         <StyledRow>
             <td>{owner}</td>
             <td>{data.food}</td>
-            { user.id === data.userId && (
+            { user?.id === data.userId && (
                 <>
                 <td>
                     <StyledBtnEdit onClick={toggleEditModal}>
