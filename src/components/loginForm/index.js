@@ -7,6 +7,7 @@ import UseForm from '../../utils/myUseForm';
 import api from '../../services/api'
 import { useUser } from '../../providers/user'
 import { useHistory } from 'react-router-dom'
+import { toastError } from '../../utils/toasts'
 
 function LoginForm() {
 
@@ -22,10 +23,11 @@ function LoginForm() {
             console.log(userData)
             history.push('/');
         })
-        .catch( error => console.log(error) );
+        .catch( error => toastError("CPF ou senha inválidos") );
     }
 
-    const { register, handleSubmit } = UseForm(loginSchema);
+    const { register, handleSubmit, formState: { errors } } = UseForm(loginSchema);
+ 
     return (
         <StyledForm
             onSubmitFunc={handleLogin}
@@ -36,7 +38,7 @@ function LoginForm() {
                 register={register}
                 name="cpf"
                 placeholder="cpf"
-                
+                errors = {errors}
             />
             <StyledInput
                 isYup
@@ -44,7 +46,7 @@ function LoginForm() {
                 name="password"
                 placeholder="password"
                 type="password"
-                
+                errors = {errors}
             />
            
             <StyledButton type='submit'>Login</StyledButton>

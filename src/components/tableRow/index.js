@@ -4,6 +4,7 @@ import { useUser } from '../../providers/user';
 import api from '../../services/api'
 import { StyledRow, StyledBtnEdit, StyledBtnDelete } from './styles'
 import EditFood from '../editFood'
+import { toastError } from '../../utils/toasts';
 
 function FoodTable({ data }) {
 
@@ -11,7 +12,7 @@ function FoodTable({ data }) {
     const { user } = useUser();
     const { food, setFood } = useFood();
     const [editModal, setEditModal] = useState(false);
-
+    const [load, setLoad] = useState(false);
 
     const toggleEditModal = () => setEditModal(!editModal);
 
@@ -22,6 +23,7 @@ function FoodTable({ data }) {
     }
     
     const editFood = (foodName) => {
+        setLoad(true)
         const newFood = {
             food: foodName
         }
@@ -33,10 +35,14 @@ function FoodTable({ data }) {
                 }
                 return item;
             })
+            setLoad(false)
             setFood(newFoods);
             toggleEditModal()
         })
-        .catch( err => console.log("Já existe um alimento com esse nome"))
+        .catch( err => {
+            setLoad(false)
+            toastError("Alguém já vai trazer este alimento!")
+        })
     }
 
     const deleteFood = () => {
@@ -65,7 +71,7 @@ function FoodTable({ data }) {
             
                 {
                     editModal === true ? (
-                        <EditFood func={editFood}/>
+                        <EditFood load={load} func={editFood}/>
                     ): (
                         <td>
                             <StyledBtnDelete onClick={deleteFood}>

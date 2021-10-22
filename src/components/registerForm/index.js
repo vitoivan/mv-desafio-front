@@ -6,6 +6,7 @@ import { registerSchema } from '../../utils/schemas'
 import UseForm from '../../utils/myUseForm';
 import api from '../../services/api'
 import { useHistory } from 'react-router-dom'
+import { toastError, toastSuccess } from '../../utils/toasts'
 
 function RegisterForm() {
 
@@ -13,11 +14,14 @@ function RegisterForm() {
     const handleRegister = (data) => {
     
         api.post('/users', data)
-        .then( resp => history.push('/login'))
-        .catch( error => console.log("CPF já cadastrado") );
+        .then( resp => {
+            toastSuccess("Conta criada com sucesso!")
+            history.push('/login')
+        })
+        .catch( error => toastError("CPF já cadastrado") );
     }
 
-    const { register, handleSubmit } = UseForm(registerSchema);
+    const { register, handleSubmit, formState: { errors } } = UseForm(registerSchema);
     return (
         <StyledForm
             onSubmitFunc={handleRegister}
@@ -28,7 +32,7 @@ function RegisterForm() {
                 register={register}
                 name="cpf"
                 placeholder="cpf"
-                
+                errors = {errors}
             />
             <StyledInput
                 isYup
@@ -36,7 +40,7 @@ function RegisterForm() {
                 name="password"
                 placeholder="password"
                 type="password"
-                
+                errors = {errors}
             />
 
             <StyledInput
@@ -45,7 +49,7 @@ function RegisterForm() {
                 name="name"
                 placeholder="Your name..."
                 type="text"
-                
+                errors = {errors}
             />
            
             <StyledButton type='submit'>Register</StyledButton>

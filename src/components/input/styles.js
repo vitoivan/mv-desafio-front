@@ -12,3 +12,8 @@ export const StyledInput = styled.input`
         color: #a0a0a0;
     }
 `;
+
+export const ErrorMsg = styled.span`
+    color: #dc3545;
+    font-size: .9rem;
+`;

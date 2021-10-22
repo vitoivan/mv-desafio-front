@@ -1,4 +1,4 @@
-import { StyledInput } from './styles';
+import { StyledInput, ErrorMsg } from './styles';
 
 function Input({
     isYup = false,
@@ -7,17 +7,23 @@ function Input({
     type = 'text',
     onChangeFunc,
     stateValue,
+    errors,
     ...rest
     
 }) {
     if(isYup === true) {
-        return ( 
-        <StyledInput
-            autoComplete="off"
-            {...register(name)} 
-            type={type}
-            {...rest}
-        />);
+        return (
+        <>
+            <StyledInput
+                autoComplete="off"
+                {...register(name)} 
+                type={type}
+                {...rest}
+            />
+            <ErrorMsg>{errors && name && errors[name]?.message }</ErrorMsg>
+        </>
+    
+        );
     }
     else {
         return (

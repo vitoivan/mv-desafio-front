@@ -13,7 +13,7 @@ export const Container = styled.section`
 
     input {
         display: block;
-        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
     button {
         margin: 1rem auto;
